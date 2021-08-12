@@ -1,0 +1,12 @@
+{
+  "state": {
+    "athlios__occupancy": {
+      "on": "Workout in progress",
+      "off": "Idle"
+    },
+    "athlios__screensaver": {
+      "on": "Active",
+      "off": "Off"
+    }
+  }
+}
