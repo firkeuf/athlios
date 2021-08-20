@@ -11,6 +11,8 @@ from homeassistant.components.sensor import (
 from homeassistant.const import (
     ATTR_DEVICE_CLASS,
     ATTR_ICON,
+    SPEED_KILOMETERS_PER_HOUR,
+    SPEED_MILES_PER_HOUR,
 )
 
 API_IMPERIAL: Final = "Imperial"
@@ -69,7 +71,7 @@ SENSOR_TYPES: Final[dict[str, SensorDescription]] = {
         ATTR_STATE_CLASS: STATE_CLASS_MEASUREMENT,
     },
     "Workout": {
-        ATTR_DEVICE_CLASS: "athlios__profile",
+        ATTR_DEVICE_CLASS: None,
         ATTR_ICON: "mdi:information-variant",
         ATTR_LABEL: "Workout",
         ATTR_UNIT_METRIC: None,
@@ -78,11 +80,38 @@ SENSOR_TYPES: Final[dict[str, SensorDescription]] = {
         ATTR_STATE_CLASS: STATE_CLASS_MEASUREMENT,
     },
     "Heartrate": {
-        ATTR_DEVICE_CLASS: "athlios__profile",
+        ATTR_DEVICE_CLASS: None,
         ATTR_ICON: "mdi:heart-pulse",
         ATTR_LABEL: "Heart rate",
         ATTR_UNIT_METRIC: "bpm",
         ATTR_UNIT_IMPERIAL: "bpm",
+        ATTR_ENABLED: True,
+        ATTR_STATE_CLASS: STATE_CLASS_MEASUREMENT,
+    },
+    "Duration": {
+        ATTR_DEVICE_CLASS: None,
+        ATTR_ICON: "mdi:clock-start",
+        ATTR_LABEL: "Duration",
+        ATTR_UNIT_METRIC: None,
+        ATTR_UNIT_IMPERIAL: None,
+        ATTR_ENABLED: True,
+        ATTR_STATE_CLASS: STATE_CLASS_MEASUREMENT,
+    },
+    "Speed": {
+        ATTR_DEVICE_CLASS: None,
+        ATTR_ICON: "mdi:speedometer",
+        ATTR_LABEL: "Speed",
+        ATTR_UNIT_METRIC: SPEED_KILOMETERS_PER_HOUR,
+        ATTR_UNIT_IMPERIAL: SPEED_MILES_PER_HOUR,
+        ATTR_ENABLED: True,
+        ATTR_STATE_CLASS: STATE_CLASS_MEASUREMENT,
+    },
+    "Grade": {
+        ATTR_DEVICE_CLASS: None,
+        ATTR_ICON: "mdi:angle-acute",
+        ATTR_LABEL: "Grade",
+        ATTR_UNIT_METRIC: "%",
+        ATTR_UNIT_IMPERIAL: "%",
         ATTR_ENABLED: True,
         ATTR_STATE_CLASS: STATE_CLASS_MEASUREMENT,
     },

@@ -64,4 +64,7 @@ class AthliOSDataUpdateCoordinator(DataUpdateCoordinator):
         result.update({"Screensaver": True if response.get('screensaver') else False})
         result.update({"Workout": response.get('workout').get('name') if type(response.get('workout')) == dict else None})
         result.update({"Heartrate": response.get('workout').get('heart_rate') if type(response.get('workout')) == dict else None})
+        result.update({"Duration": timedelta(seconds=round(response.get('workout').get('duration'))) if type(response.get('workout')) == dict else None})
+        result.update({"Speed": response.get('workout').get('speed') if type(response.get('workout')) == dict else None})
+        result.update({"Grade": response.get('workout').get('grade') if type(response.get('workout')) == dict else None})
         return result

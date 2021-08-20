@@ -14,6 +14,8 @@ from .const import (
     ATTRIBUTION,
     MANUFACTURER,
     ATTR_ENABLED,
+    ATTR_UNIT_IMPERIAL,
+    ATTR_UNIT_METRIC,
 )
 from . import AthliOSDataUpdateCoordinator
 
@@ -51,6 +53,13 @@ class AthliOSSensor(CoordinatorEntity, SensorEntity):
         return f"{self._name} {self._description[ATTR_LABEL]}"
 
     @property
+    def unit_of_measurement(self):
+        """Return the unit the value is expressed in."""
+        if self.coordinator.is_metric:
+            return self._description[ATTR_UNIT_METRIC]
+        return self._description[ATTR_UNIT_IMPERIAL]
+
+    @property
     def device_class(self):
         return self._description[ATTR_DEVICE_CLASS]
 
@@ -83,4 +92,7 @@ class AthliOSSensor(CoordinatorEntity, SensorEntity):
     @property
     def state(self) -> StateType:
         """Return the state of the entity."""
+        if not self.coordinator.is_metric and self.kind == "Speed":
+            return round(float(self.coordinator.data.get(self.kind)) * 1.609344)
         return self.coordinator.data.get(self.kind)
+
