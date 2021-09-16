@@ -79,6 +79,15 @@ SENSOR_TYPES: Final[dict[str, SensorDescription]] = {
         ATTR_ENABLED: True,
         ATTR_STATE_CLASS: STATE_CLASS_MEASUREMENT,
     },
+    "Phase": {
+        ATTR_DEVICE_CLASS: None,
+        ATTR_ICON: "mdi:information-variant",
+        ATTR_LABEL: "Phase",
+        ATTR_UNIT_METRIC: None,
+        ATTR_UNIT_IMPERIAL: None,
+        ATTR_ENABLED: True,
+        ATTR_STATE_CLASS: STATE_CLASS_MEASUREMENT,
+    },
     "Heartrate": {
         ATTR_DEVICE_CLASS: None,
         ATTR_ICON: "mdi:heart-pulse",

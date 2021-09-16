@@ -62,7 +62,12 @@ class AthliOSDataUpdateCoordinator(DataUpdateCoordinator):
         result.update({"CurrentProfile": "empty" if not response.get('current_profile') else "%(first_name)s %(last_name)s" % response.get('current_profile')})
         result.update({"Status": True if response.get('workout') else False})
         result.update({"Screensaver": True if response.get('screensaver') else False})
-        result.update({"Workout": response.get('workout').get('name') if type(response.get('workout')) == dict else None})
+        result.update({"Workout": response.get('workout').get('current_preset_name') if type(response.get('workout')) == dict else None})
+
+        result.update({"Phase": response.get('workout').get('current_phase_name') if type(response.get('workout')) == dict else None})
+        if result.get("Workout") == "Manual":
+            result["Phase"] = None
+
         result.update({"Heartrate": response.get('workout').get('heart_rate') if type(response.get('workout')) == dict else None})
         result.update({"Duration": timedelta(seconds=round(response.get('workout').get('duration'))) if type(response.get('workout')) == dict else None})
         result.update({"Speed": response.get('workout').get('speed') if type(response.get('workout')) == dict else 0})
