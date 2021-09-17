@@ -93,6 +93,6 @@ class AthliOSSensor(CoordinatorEntity, SensorEntity):
     def state(self) -> StateType:
         """Return the state of the entity."""
         if not self.coordinator.is_metric and self.kind == "Speed":
-            return round(float(self.coordinator.data.get(self.kind)) * 1.609344)
+            return round(float(self.coordinator.data.get(self.kind)) / 1.609344, 1)
         return self.coordinator.data.get(self.kind)
 
