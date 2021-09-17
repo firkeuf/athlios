@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from typing import Any, Dict
 from datetime import timedelta
+from asyncio import gather
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
@@ -57,19 +58,23 @@ class AthliOSDataUpdateCoordinator(DataUpdateCoordinator):
         """Update data via library."""
         host = self.config_entry.data.get(CONF_HOST)
         port = self.config_entry.data.get(CONF_PORT)
-        response = await async_get(self.hass, f'{host}:{port}', API['HA'], API['protocol'])
-        result = {}
-        result.update({"CurrentProfile": "empty" if not response.get('current_profile') else "%(first_name)s %(last_name)s" % response.get('current_profile')})
-        result.update({"Status": True if response.get('workout') else False})
-        result.update({"Screensaver": True if response.get('screensaver') else False})
-        result.update({"Workout": response.get('workout').get('current_preset_name') if type(response.get('workout')) == dict else None})
+        task_ha = async_get(self.hass, f'{host}:{port}', API['HA'], API['protocol'])
+        task_s = async_get(self.hass, f'{host}:{port}', API['Server'], API['protocol'])
+        response_ha, response_s = await gather(task_ha, task_s)
 
-        result.update({"Phase": response.get('workout').get('current_phase_name') if type(response.get('workout')) == dict else None})
+        result = {}
+
+        result.update({"CurrentProfile": "empty" if not response_ha.get('current_profile') else "%(first_name)s %(last_name)s" % response_ha.get('current_profile')})
+        result.update({"Status": True if response_ha.get('workout') else False})
+        result.update({"Screensaver": True if response_ha.get('screensaver') else False})
+        result.update({"Workout": response_ha.get('workout').get('current_preset_name') if type(response_ha.get('workout')) == dict else None})
+        result.update({"Phase": response_ha.get('workout').get('current_phase_name') if type(response_ha.get('workout')) == dict else None})
         if result.get("Workout") == "Manual":
             result["Phase"] = None
 
-        result.update({"Heartrate": response.get('workout').get('heart_rate') if type(response.get('workout')) == dict else None})
-        result.update({"Duration": timedelta(seconds=round(response.get('workout').get('duration'))) if type(response.get('workout')) == dict else None})
-        result.update({"Speed": response.get('workout').get('speed') if type(response.get('workout')) == dict else 0})
-        result.update({"Grade": response.get('workout').get('grade') if type(response.get('workout')) == dict else 0})
+        result.update({"Heartrate": response_ha.get('workout').get('heart_rate') if type(response_ha.get('workout')) == dict else None})
+        result.update({"Duration": timedelta(seconds=round(response_ha.get('workout').get('duration'))) if type(response_ha.get('workout')) == dict else None})
+        result.update({"Speed": response_ha.get('workout').get('speed') if type(response_ha.get('workout')) == dict else 0})
+        result.update({"Grade": response_ha.get('workout').get('grade') if type(response_ha.get('workout')) == dict else 0})
+        result.update({"InactiveTime": response_s.get('inactive_time')})
         return result

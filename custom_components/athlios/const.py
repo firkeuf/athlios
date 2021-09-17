@@ -13,6 +13,7 @@ from homeassistant.const import (
     ATTR_ICON,
     SPEED_KILOMETERS_PER_HOUR,
     SPEED_MILES_PER_HOUR,
+    ATTR_SECONDS,
 )
 
 API_IMPERIAL: Final = "Imperial"
@@ -33,6 +34,7 @@ API = {
     "protocol": "http",
     "Device": "/api/v1/device",
     "HA": "/api/v1/ha",
+    "Server": "/api/v1/server",
 }
 
 
@@ -58,9 +60,17 @@ BINARY_SENSOR_TYPES: Final[dict[str, SensorDescription]] = {
         ATTR_STATE_CLASS: STATE_CLASS_MEASUREMENT,
     },
 
-
 }
 SENSOR_TYPES: Final[dict[str, SensorDescription]] = {
+    "InactiveTime": {
+        ATTR_DEVICE_CLASS: None,
+        ATTR_ICON: "mdi:information-variant",
+        ATTR_LABEL: "Inactive Time",
+        ATTR_UNIT_METRIC: ATTR_SECONDS,
+        ATTR_UNIT_IMPERIAL: ATTR_SECONDS,
+        ATTR_ENABLED: True,
+        ATTR_STATE_CLASS: STATE_CLASS_MEASUREMENT,
+    },
     "CurrentProfile": {
         ATTR_DEVICE_CLASS: "athlios__profile",
         ATTR_ICON: "mdi:account",
