@@ -4,6 +4,8 @@ from homeassistant.components.sensor import ATTR_STATE_CLASS, SensorEntity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from homeassistant.helpers.typing import StateType
 from homeassistant.helpers.entity import DeviceInfo
+from homeassistant.helpers.device_registry import DeviceEntryType
+
 
 import logging
 
@@ -81,7 +83,7 @@ class AthliOSSensor(CoordinatorEntity, SensorEntity):
             "name": f"{self.coordinator.config_entry.data.get(CONF_NAME)}",
             "manufacturer": MANUFACTURER,
             "model": self.coordinator.config_entry.data.get(ATTR_MODEL),
-            "entry_type": "service",
+            "entry_type": DeviceEntryType.SERVICE,
         }
 
     @property
