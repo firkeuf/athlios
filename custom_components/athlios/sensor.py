@@ -5,7 +5,7 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from homeassistant.helpers.typing import StateType
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.device_registry import DeviceEntryType
-
+from homeassistant.util.unit_system import METRIC_SYSTEM
 
 import logging
 
@@ -57,7 +57,7 @@ class AthliOSSensor(CoordinatorEntity, SensorEntity):
     @property
     def unit_of_measurement(self):
         """Return the unit the value is expressed in."""
-        if self.coordinator.is_metric:
+        if self.coordinator.units is METRIC_SYSTEM :
             return self._description[ATTR_UNIT_METRIC]
         return self._description[ATTR_UNIT_IMPERIAL]
 
@@ -94,7 +94,7 @@ class AthliOSSensor(CoordinatorEntity, SensorEntity):
     @property
     def state(self) -> StateType:
         """Return the state of the entity."""
-        if not self.coordinator.is_metric and self.kind == "Speed":
+        if not self.coordinator.units is METRIC_SYSTEM and self.kind == "Speed":
             return round(float(self.coordinator.data.get(self.kind)) / 1.609344, 1)
         return self.coordinator.data.get(self.kind)
 

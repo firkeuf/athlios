@@ -50,7 +50,7 @@ class AthliOSDataUpdateCoordinator(DataUpdateCoordinator):
     def __init__(self, hass: HomeAssistant, ) -> None:
         """Initialize."""
         update_interval = timedelta(seconds=2)
-        self.is_metric = hass.config.units.is_metric
+        self.units = hass.config.units
         _LOGGER.debug("Data will be update every %s", update_interval)
         super().__init__(hass, _LOGGER, name=DOMAIN, update_interval=update_interval)
 
