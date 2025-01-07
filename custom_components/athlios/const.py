@@ -11,8 +11,7 @@ from homeassistant.components.sensor import (
 from homeassistant.const import (
     ATTR_DEVICE_CLASS,
     ATTR_ICON,
-    SPEED_KILOMETERS_PER_HOUR,
-    SPEED_MILES_PER_HOUR,
+    UnitOfSpeed,
     ATTR_SECONDS,
 )
 
@@ -120,8 +119,8 @@ SENSOR_TYPES: Final[dict[str, SensorDescription]] = {
         ATTR_DEVICE_CLASS: None,
         ATTR_ICON: "mdi:speedometer",
         ATTR_LABEL: "Speed",
-        ATTR_UNIT_METRIC: SPEED_KILOMETERS_PER_HOUR,
-        ATTR_UNIT_IMPERIAL: SPEED_MILES_PER_HOUR,
+        ATTR_UNIT_METRIC: UnitOfSpeed.KILOMETERS_PER_HOUR,
+        ATTR_UNIT_IMPERIAL: UnitOfSpeed.MILES_PER_HOUR,
         ATTR_ENABLED: True,
         ATTR_STATE_CLASS: SensorStateClass.MEASUREMENT,
     },
