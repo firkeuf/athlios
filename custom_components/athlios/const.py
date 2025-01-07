@@ -5,7 +5,7 @@ from typing import Final, TypedDict
 
 from homeassistant.components.sensor import (
     ATTR_STATE_CLASS,
-    STATE_CLASS_MEASUREMENT,
+    SensorStateClass
 )
 
 from homeassistant.const import (
@@ -47,7 +47,7 @@ BINARY_SENSOR_TYPES: Final[dict[str, SensorDescription]] = {
         ATTR_UNIT_METRIC: None,
         ATTR_UNIT_IMPERIAL: None,
         ATTR_ENABLED: True,
-        ATTR_STATE_CLASS: STATE_CLASS_MEASUREMENT,
+        ATTR_STATE_CLASS: SensorStateClass.MEASUREMENT,
     },
     "Screensaver": {
         ATTR_DEVICE_CLASS: "athlios__screensaver",
@@ -57,7 +57,7 @@ BINARY_SENSOR_TYPES: Final[dict[str, SensorDescription]] = {
         ATTR_UNIT_METRIC: None,
         ATTR_UNIT_IMPERIAL: None,
         ATTR_ENABLED: True,
-        ATTR_STATE_CLASS: STATE_CLASS_MEASUREMENT,
+        ATTR_STATE_CLASS: SensorStateClass.MEASUREMENT,
     },
 
 }
@@ -69,7 +69,7 @@ SENSOR_TYPES: Final[dict[str, SensorDescription]] = {
         ATTR_UNIT_METRIC: ATTR_SECONDS,
         ATTR_UNIT_IMPERIAL: ATTR_SECONDS,
         ATTR_ENABLED: True,
-        ATTR_STATE_CLASS: STATE_CLASS_MEASUREMENT,
+        ATTR_STATE_CLASS: SensorStateClass.MEASUREMENT,
     },
     "CurrentProfile": {
         ATTR_DEVICE_CLASS: "athlios__profile",
@@ -78,7 +78,7 @@ SENSOR_TYPES: Final[dict[str, SensorDescription]] = {
         ATTR_UNIT_METRIC: None,
         ATTR_UNIT_IMPERIAL: None,
         ATTR_ENABLED: True,
-        ATTR_STATE_CLASS: STATE_CLASS_MEASUREMENT,
+        ATTR_STATE_CLASS: SensorStateClass.MEASUREMENT,
     },
     "Workout": {
         ATTR_DEVICE_CLASS: None,
@@ -87,7 +87,7 @@ SENSOR_TYPES: Final[dict[str, SensorDescription]] = {
         ATTR_UNIT_METRIC: None,
         ATTR_UNIT_IMPERIAL: None,
         ATTR_ENABLED: True,
-        ATTR_STATE_CLASS: STATE_CLASS_MEASUREMENT,
+        ATTR_STATE_CLASS: SensorStateClass.MEASUREMENT,
     },
     "Phase": {
         ATTR_DEVICE_CLASS: None,
@@ -96,7 +96,7 @@ SENSOR_TYPES: Final[dict[str, SensorDescription]] = {
         ATTR_UNIT_METRIC: None,
         ATTR_UNIT_IMPERIAL: None,
         ATTR_ENABLED: True,
-        ATTR_STATE_CLASS: STATE_CLASS_MEASUREMENT,
+        ATTR_STATE_CLASS: SensorStateClass.MEASUREMENT,
     },
     "Heartrate": {
         ATTR_DEVICE_CLASS: None,
@@ -105,7 +105,7 @@ SENSOR_TYPES: Final[dict[str, SensorDescription]] = {
         ATTR_UNIT_METRIC: "bpm",
         ATTR_UNIT_IMPERIAL: "bpm",
         ATTR_ENABLED: True,
-        ATTR_STATE_CLASS: STATE_CLASS_MEASUREMENT,
+        ATTR_STATE_CLASS: SensorStateClass.MEASUREMENT,
     },
     "Duration": {
         ATTR_DEVICE_CLASS: None,
@@ -114,7 +114,7 @@ SENSOR_TYPES: Final[dict[str, SensorDescription]] = {
         ATTR_UNIT_METRIC: None,
         ATTR_UNIT_IMPERIAL: None,
         ATTR_ENABLED: True,
-        ATTR_STATE_CLASS: STATE_CLASS_MEASUREMENT,
+        ATTR_STATE_CLASS: SensorStateClass.MEASUREMENT,
     },
     "Speed": {
         ATTR_DEVICE_CLASS: None,
@@ -123,7 +123,7 @@ SENSOR_TYPES: Final[dict[str, SensorDescription]] = {
         ATTR_UNIT_METRIC: SPEED_KILOMETERS_PER_HOUR,
         ATTR_UNIT_IMPERIAL: SPEED_MILES_PER_HOUR,
         ATTR_ENABLED: True,
-        ATTR_STATE_CLASS: STATE_CLASS_MEASUREMENT,
+        ATTR_STATE_CLASS: SensorStateClass.MEASUREMENT,
     },
     "Grade": {
         ATTR_DEVICE_CLASS: None,
@@ -132,7 +132,7 @@ SENSOR_TYPES: Final[dict[str, SensorDescription]] = {
         ATTR_UNIT_METRIC: "%",
         ATTR_UNIT_IMPERIAL: "%",
         ATTR_ENABLED: True,
-        ATTR_STATE_CLASS: STATE_CLASS_MEASUREMENT,
+        ATTR_STATE_CLASS: SensorStateClass.MEASUREMENT,
     },
 }
 
